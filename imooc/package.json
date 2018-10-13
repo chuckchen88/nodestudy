@@ -1,0 +1,23 @@
+{
+  "name": "imooc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "destroy": "^1.0.4",
+    "ee-first": "^1.1.1",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "finalhandler": "^1.1.1",
+    "http-errors": "~1.6.2",
+    "mongoose": "^3.9.7",
+    "morgan": "~1.9.0",
+    "path-to-regexp": "^2.4.0",
+    "utils-merge": "^1.0.1"
+  }
+}
