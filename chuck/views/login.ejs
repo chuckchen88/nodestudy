@@ -1,0 +1,21 @@
+ <link rel='stylesheet' href='/stylesheets/login.css' />
+<% include header.ejs %>
+<div class="bg">
+	<div class="login">
+		<h1 class="t">登录</h1>
+		<form method="post">
+			<p class="<%= err %>">*<%= status %></p>
+			<label><span>用户名</span><input name="name" type="text" placeholder="请输入用户名" autofocus="autofocus"></label>
+			<label><span>密码</span><input name="password" type="password" placeholder="请输入密码"></label>
+			<p class="reg"><a href="reg">没有账号?去注册</a></p>
+			<label><input type="submit" value="登录"></label>
+		</form>
+	</div>
+</div>
+<% include footer.ejs %>
+<script>
+	$(function(){
+		nav(5);
+		PullDownMenu();
+	})
+</script>

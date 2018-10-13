@@ -1,0 +1,76 @@
+.bg{
+	position:relative;
+	width:100%;
+	height: calc(100vh - 110px); 
+	min-height: 400px;
+	background:url(../images/login/login_bg.jpg) center center no-repeat;
+	background-size:cover;
+}
+.login{
+	position:absolute;
+	width:400px;
+	height:auto;
+	background:white;
+	left:50%;
+	top:50%;
+	margin-left:-200px;
+	margin-top:-150px;
+}
+.login .t{
+	width:100%;
+	background:url(../images/index/small-nav.jpg);
+	color:white;
+	font-size:16px;
+	padding:5px 10px;
+}
+.login form{
+	padding:20px;
+}
+.login .err{
+	color:#d52121;
+	text-align:right;
+	font-size:12px;
+}
+.login .reg{
+	text-align:right;
+}
+.login .reg a{
+	color:#333;
+	font-size:12px;
+}
+.login input[type="email"],.login input[type="password"],.login input[type="text"]{
+	width:80%;
+	height:30px;
+	line-height: 30px;
+	padding-left:5px;
+}
+.login label{
+	display:inline-block;
+	margin:10px 0;
+	width:100%;
+}
+.login label span{
+	display:inline-block;
+	width:20%;
+	text-align:right;
+	box-sizing: border-box;
+	padding-right:5px;
+}
+.login input[type="submit"]{
+	width:100%;
+	height:30px;
+	background:url(../images/index/small-nav.jpg);
+	color:white;
+	font-size:14px;
+	border:none;
+	cursor:pointer;
+}
+
+
+
+.correct{
+	display:none;
+}
+.err{
+	display:block;
+}

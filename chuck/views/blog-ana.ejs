@@ -1,0 +1,133 @@
+ <link rel='stylesheet' href='/stylesheets/blog.css' />
+<% include header.ejs %>
+<% if(user) {%>
+	<% if (user.name == 'chuck') { %>
+	<div class="masker">
+		<div class="message">
+			<div class="closeBtn"></div>
+			<div class="t"><span></span>发布新随心说</div>
+			<form action="" method="post">
+				<input name="picUrl" type="text" value="" placeholder="请输入缩略图文件名包含后缀">
+				<textarea name="anas" placeholder="输入内容"></textarea>
+				<input type="submit" value="发布">
+			</form>
+		</div>
+	</div>
+	<% } %>
+<% } %>
+<div class="top">
+	<div class="t">
+		<h1>Welcome to my blog</h1>
+		<p>Chuck.Chen's blog</p>
+	</div>
+</div>
+<div class="contain articles">
+	<div class="position">
+		<span class="fl-l">
+			<i class="p"></i>所在位置：<a href="javascipt:">随心说</a></a>
+		</span>
+		<% if(user) {%>
+			<% if (user.name == 'chuck') { %>
+			<span class="fl-r write-art">
+				<a href="#"><span></span>写随心说</a>
+			</span>
+			<% } %>
+		<% } %>
+		<div class="clear"></div>
+	</div>
+	<div class="content-area">
+		<div class="fl-l art-items">
+			<div id="anas">
+			<% anas.forEach(function(ana, index){ %>
+				<div class="art-item">
+					<div class="des">
+						<div class="thum" style="background:url(/images/blog/articlePics/<%= ana.picUrl %>) center center no-repeat;background-size:cover;"></div>
+						<div class="info">
+							<%- ana.content %>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="time">
+						<span class="fl-l">发表时间：<%= ana.time.minute %></span>
+						<% if(user) {%>
+							<% if (user.name == 'chuck') { %>
+							<span class="fl-r">&nbsp;&nbsp;
+								<a style="color:#333;" href="/blog-ana/remove/<%= ana._id %>" onclick="javascript:return del()">删除</a>
+							</span>
+							<% } %>
+						<% } %>
+						<span class="fl-r">作者：Chuck</span>
+						<div class="clear"></div>
+					</div>
+				</div>
+			<% }) %>
+			</div>
+			<div class="add-more">
+				加载更多随心说...
+			</div>
+		</div>
+		<div class="fl-r about-info">
+			<div class="hot-art">
+				<h1 class="t"><span></span>最热文章</h1>
+				<ul>
+					<% topFive.forEach(function(article, index) { %>
+						<li><span><%= index+1 %></span><a href="/blog-article/<%= page %>/<%= article._id %>"><%= article.thumTitle %></a><i class="fl-r" style="color:#666;font-size:12px;"><%= article.time.day %></i></li>
+					<% }) %>
+				</ul>
+			</div>
+			<div class="about-blog">
+				<h1 class="t"><span></span>关于随心说</h1>
+				<p style="text-indent: 24px;">
+					欢迎您来到我的博客，此博客系统是我本人于3月初启动到4月底设计开发完成的。主要目的是分享我自己的博文、随心说说，网友有任何想法和建议都可以对其进行评论留言。此博客功能是用node结合着mongodb技术开发实现的，无论是响应速度还是数据存储读取速度都是极快的，但仍然也存在着很多的不足，希望通道中人多多指教，因为您的建议和想法是我最宝贵的财富。
+				</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<% include footer.ejs %>
+<script>
+	function moreNews(page){
+		$.ajax({
+			url : "/blog-ana/"+ page +"/",
+			data:{page : page},
+			success : function(data) {
+				console.log(data)
+				if(data.length == 0){
+					$(".add-more").hide();
+					$("#anas").append('<p style="color:#666;font-size:14px;text-align:center;margin:10px 0;">已加载全部</p>');
+					return;
+				}
+				for(var i=0;i<data.length;i++){
+					var str = '<div class="art-item"><div class="des"><div class="thum" style="background:url(/images/blog/articlePics/'+data[i].picUrl+') center center no-repeat;background-size:cover;"></div><div class="info">'+data[i].content+'</div><div class="clear"></div></div><div class="time"><span class="fl-l">发表时间：'+data[i].time.minute+'</span><% if(user) {%><% if (user.name == "chuck") { %><span class="fl-r">&nbsp;&nbsp;<a style="color:#333;" href="/blog-ana/remove/'+data[i]._id+'">删除</a></span><% } %><% } %><span class="fl-r">作者：Chuck</span><div class="clear"></div></div></div>';
+					$("#anas").append(str);
+				}
+			}
+		});
+	}
+	function del() { 
+		var msg = "您真的确定要删除吗？\n\n请确认！"; 
+		if (confirm(msg)==true){ 
+			return true; 
+		}else{ 
+			return false; 
+		} 
+	}
+	$(function(){
+		nav(3);
+		PullDownMenu();
+		$('.write-art').click(function(){
+			$('.masker').show();
+		})
+		$('.closeBtn').click(function(){
+			$('.masker').hide();
+		})
+
+		var num = 2;
+		$('.add-more').click(function(){
+			moreNews(num);
+			num++;
+		})
+
+	})
+</script>

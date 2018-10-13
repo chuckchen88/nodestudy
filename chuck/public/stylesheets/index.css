@@ -1,0 +1,359 @@
+.page{
+	position:relative;
+	width:100%;
+	min-width: 1200px;
+	height:100%;
+	overflow: hidden;
+}
+.small-nav{
+	position:relative;
+	display:inline-block;
+	position:fixed;
+	width:120px;
+	height:300px;
+	top:50%;
+	right:-100px;
+	margin-top:-170px;
+	transition:all 0.3s linear;
+	z-index: 998;
+}
+.small-nav:hover{
+	right:0;
+}
+.small-nav:hover .arr{
+	opacity:0;
+}
+.small-nav ul{
+	margin-left:20px;
+	margin-top:60px;
+}
+.small-nav ul li{
+	position:relative;
+	width:100px;
+	text-align: center;
+	height:26px;
+	line-height:26px;
+	margin:20px 0;
+	background:url(../images/index/small-nav-bg.jpg);
+	color:#999;
+	font-size:12px;
+	transition:all 0.3s linear;
+	cursor:pointer;
+}
+.small-nav ul li span{
+	position:absolute;
+	left:-20px;
+	display:inline-block;
+	width:20px;
+	height:26px;
+	background:url(../images/index/small-nav.jpg);
+	float:left;
+	opacity:0.8;
+	transition:all 0.3s linear;
+}
+.small-nav ul li.active span,.small-nav ul li:hover span{
+	opacity:1;
+}
+.small-nav ul li.active,.small-nav ul li:hover{
+	color:#333;
+}
+.small-nav .arr{
+	position:absolute;
+	width:50px;
+	height:30px;
+	top:50%;
+	left:-50px;
+}
+.small-nav .arr span{
+	position:absolute;
+	display:inline-block;
+	width:15px;
+	height:30px;
+	background:url(../images/index/small-nav-arr.png) center center no-repeat;
+}
+.small-nav .arr span:nth-of-type(1){
+	left:0;
+	animation: moveLeftfirst linear 1s infinite;
+}
+.small-nav .arr span:nth-of-type(2){
+	right:20px;
+	animation: moveLeft linear 1s infinite 0.3s;
+}
+@keyframes moveLeftfirst{
+	0,100%{left:0;opacity:0.6;}
+	80% {left:-10px;opacity:0;}
+	85%{left:20px;opacity:0;}
+}
+@keyframes moveLeft{
+	0,100%{right:20;opacity:0.6;}
+	80% {right:30px;opacity:0;}
+	85%{right:0px;opacity:0;}
+}
+
+
+/**welcome**/
+.welcome{
+	background:url(../images/index/top-bg.jpg) center center no-repeat;
+	background-size:cover;
+}
+.about{
+	background:url(../images/index/about-bg.jpg) center center no-repeat;
+	background-size:cover;
+}
+.blog{
+	background:url(../images/index/blog-bg.jpg) center center no-repeat;
+	background-size:cover;
+}
+.leave{
+	background:url(../images/index/leave-bg.jpg) center center no-repeat;
+	background-size:cover;
+}
+
+.page.active .text h1,.page.active .text h3,.page.active .text p{
+	opacity:1;
+	transform: translateY(0);
+}
+
+
+.page>p{
+	position:absolute;
+	display:inline-block;
+	left:10px;
+	top:10px;
+	font-size:18px;
+	color:#999;
+}
+.page.welcome>p{
+	top:90px;
+	color:#aaa;
+}
+.text{
+	display:inline-block;
+	color:#333;
+}
+.text h1{
+	font-size:40px;
+	opacity:0;
+	transform: translateY(100px);
+	transition:all 0.3s linear .5s;
+}
+.text h3{
+	font-size:18px;
+	margin-top:10px;
+	line-height: 32px;
+	opacity:0;
+	transform: translateY(100px);
+	transition:all 0.3s linear .7s;
+}
+.text p{
+	margin:10px 0 0 0;
+	opacity:0;
+	transform: translateY(100px);
+	transition:all 0.3s linear .9s;
+}
+.text p a{
+	color:#0068b7;
+	font-size:18px;
+}
+.welcome .text{
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-100px;
+	color:white;
+}
+.blog .text{
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-150px;
+	color:#eee;
+}
+.welcome .text h3{
+	color:#ccc;
+}
+.about .text{
+	position:absolute;
+	left:50%;
+	top:15%;
+    margin-left: -586px;
+}
+.about .text h1 span{
+	font-size:18px;
+	color:#666;
+}
+.blog .text h1 span{
+	color:#ccc;
+	font-size:18px;
+}
+.works .text{
+	display:block;
+    text-align: center;
+    margin-top:15vh;
+}
+.leave .text{
+	display:block;
+	position:absolute;
+	top:50%;
+	width:100%;
+    text-align: center;
+    margin-top:-100px;
+}
+
+.scroll-more{
+	position:absolute;
+	display:inline-block;
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	left:50%;
+	bottom:50px;
+	margin-left:-25px;
+	background:white url(../images/index/scroll-more.png) center center no-repeat;
+	background-size:50%;
+	box-shadow:0 0px 2px 0px #666;
+	cursor:pointer;
+	z-index: 99;
+}
+.leave .scroll-more{
+	transform:rotateZ(180deg) !important;
+}
+.scroll-text{
+	position:absolute;
+	display:inline-block;
+	width:150px;
+	border-radius:50%;
+	left:50%;
+	bottom:20px;
+	margin-left:-75px;
+	text-align: center;
+	color:#666;
+	z-index: 99;
+}
+.text p.leave-btn{
+	margin-top:30px;
+}
+.text p.leave-btn a{
+	display:inline-block;
+	width:200px;
+	height:40px;
+	line-height: 40px;
+	font-size:14px;
+	color:#eee;
+	background:url(../images/index/nav-bg.jpg);
+}
+
+
+/**wrok list***/
+.lists {
+	position:absolute;
+	width:100%;
+	min-width: 1200px;
+	bottom:0;
+	z-index: 1;
+}
+.lists ul{
+	padding: 0.4% 0.2%;
+	overflow: hidden;
+}
+.lists ul li{
+	position:relative;
+	width:25%;
+	height:50vh;
+	min-height:300px;
+	background:white;
+	float:left;
+	opacity:0;
+	transform: translateY(200px);
+}
+.lists ul li:nth-of-type(1){
+	transition:all 0.3s linear 0.7s;
+}
+.lists ul li:nth-of-type(2){
+	transition:all 0.3s linear 0.9s;
+}
+.lists ul li:nth-of-type(3){
+	transition:all 0.3s linear 1.1s;
+}
+.lists ul li:nth-of-type(4){
+	transition:all 0.3s linear 1.3s;
+}
+.works.active .lists ul li{
+	opacity:1;
+	transform: translate(0);
+}
+.lists ul li a{
+	display:block;
+	padding:2% 10px;
+	height:100%;
+	background:url(../images/index/small-nav-bg.jpg);
+	width:93%;
+	border-radius:8px 8px 0 0;
+}
+.lists ul li .img{
+	width:100%;
+	height:60%;
+	min-height: 100px;
+	margin:0 auto;
+	transition:background-position 0.3s;
+	border-radius:8px 8px 0 0;
+}
+.lists ul li .img-item1{
+	background:url(../images/index/01.png) center center no-repeat;
+	background-size:cover;
+}
+.lists ul li .img-item2{
+	background:url(../images/index/02.png) center center no-repeat;
+	background-size:cover;
+}
+.lists ul li .img-item3{
+	background:url(../images/index/03.png) center center no-repeat;
+	background-size:cover;
+}
+.lists ul li .img-item4{
+	background:url(../images/index/04.png) center center no-repeat;
+	background-size:cover;
+}
+
+.lists ul li .t{
+	position: absolute;
+    display: inline-block;
+    z-index: 2;
+    background: white;
+    width: 93%;
+    padding: 0 10px;
+    height: 38%;
+    bottom:0;
+    transition: all 0.3s linear;
+}
+.lists ul li .t h1{
+	position:relative;
+	font-size:20px;
+	color:#333;
+	font-weight: bold;
+	top:30%;
+	transition: all 0.3s linear;
+}
+.lists ul li .t h1 span{
+	font-size:12px;
+	color:#999;
+}
+.lists ul li .t h3{
+	position:relative;
+	font-size:14px;
+	color:#666;
+	font-weight: normal;
+	opacity:0;
+	top:50%;
+	transition: all 0.3s linear;
+}
+.lists ul li:hover .t{
+	height:70%;
+}
+.lists ul li:hover .t h1{
+	top:10%;
+}
+.lists ul li:hover .t h3{
+	top:20%;
+	opacity:1;
+}

@@ -1,0 +1,123 @@
+ <link rel='stylesheet' href='/stylesheets/leave-words.css' />
+<% include header.ejs %>
+<div class="top">
+	<div class="text">
+		<h3>留言板</h3>
+		<p>把他娘的意大利炮拿来</p>
+	</div>
+</div>
+<div class="contain leave">
+	<div class="fl-l con">
+		<div class="leave-area">
+			<form method="post" action="/leave-words" onsubmit="return check(this)">
+				<input name="name" type="text" placeholder="请输入您的昵称" autofocus>
+				<label class="err">* 昵称是必填项哦(不得超过40字符)</label>&nbsp;&nbsp;&nbsp;&nbsp;<label class="err">* 留言内容必填项哦</label><br>
+				<textarea id="messages" name="messages" rows="4" cols="50" placeholder="请输入您的留言内容..."></textarea>
+				<div class="expression">
+					<a href="javascipt:;" class="emotion fl-l" title="插入表情"></a>
+					<input type="submit" class="btn fl-r" value="留言">
+					<div class="clear"></div>
+				</div>
+			</form>
+			<p class="l">目前留言板暂无删除功能，谨慎留言哦！</p>
+			<p class="r">字数限定在200字</p>
+		</div>
+		<div class="leave-lists" id="leave-lists">
+			<% users.forEach(function(user, index){ %>
+				<div class="item">
+					<h1><span></span><%= user.name %><label>第<%= user.id %>楼</label></h1>
+					<div class="con-area">
+						<div class="head-img"></div>
+						<div class="message">
+							<%- user.message %>
+						</div>
+						<div class="clear"></div>
+						<p class="time"><%= user.time.minute %></p>
+						<div class="clear"></div>
+					</div>
+				</div>
+			<% }) %>
+			
+		</div>
+		<div class="add-more">
+			加载更多留言...
+		</div>
+	</div>
+	<div class="fl-r info">
+		<div class="master-word">
+			<h1><span></span>主人寄语</h1>
+			<div class="info-content">
+				真正有目标的人一定不会惧怕任何艰难险阻。你可能会把所有人当作是平等的状态，你不会觉得你的领导权利多么吓人，你也不会觉得习近平吃了个包子是件多么惊奇的事，更不会觉得周杰伦有多吊。时代在发展，人文在进步，我相信每一代人的素质修养也在随着时代的变化慢慢提高。咱们不追求溜须拍马，咱们不去斤斤计较，咱们也不管职场险恶，咱们只做一件事，一件你想做的事，一件你一辈子也不会忘记的事。
+			</div>
+		</div>
+		<div class="about-leave">
+		<h1><span></span>关于留言板</h1>
+			<div class="info-content">
+				由于本人时间成本问题，很多功能都没有策划，所以留言功能目前暂时不够强大，暂时还没有编辑、回复、删除等功能，目前只能够留言并查看留言板内容。但后续会完善这些功能，网友有任何想法和建议都可以暂时通过目前简单的留言功能给作者留言。
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<% include footer.ejs %>
+
+<script>
+	function check(form){ 
+		 
+		 if(form.name.value=='') {
+                alert("昵称是必填项哦!");
+                form.name.focus();
+                return false;
+           }
+      	 if(form.messages.value==''){
+                alert("留言内容必填项哦!");
+                form.messages.focus();
+                return false;
+         }
+		if(form.name.value.length>40){
+         	alert("昵称长度必须在40字以内哦!");
+            form.name.focus();
+            return false;
+         }
+        if(form.messages.value.length>200){
+         	alert("留言内容长度在200字以内哦!");
+            form.messages.focus();
+            return false;
+        }
+         return true;
+	}
+	function moreNews(page){
+		$.ajax({
+			url : "leave-words/"+ page +"/",
+			data:{page : page},
+			success : function(data) {
+				
+				if(data.length == 0){
+					$(".add-more").hide();
+					$("#leave-lists").append('<p style="color:#666;font-size:14px;text-align:center;margin:10px 0;">已加载全部</p>');
+					return;
+				}
+				for(var i=0;i<data.length;i++){
+					var str = '<div class="item"><h1><span></span>'+ data[i].name +'<label>第'+ data[i].id +'楼</label></h1><div class="con-area"><div class="head-img"></div><div class="message">'+ data[i].message +'</div><div class="clear"></div><p class="time">'+ data[i].time.minute +'</p><div class="clear"></div></div></div>'
+					$("#leave-lists").append(str);
+				}
+			}
+		});
+	}
+	$(function(){
+		nav(4);
+		PullDownMenu();
+		var num = 2;
+		$('.add-more').click(function(){
+			moreNews(num);
+			num++;
+		})
+		//qq表情
+		$('.emotion').qqFace({
+			id : 'facebox', 
+			assign:'messages', 
+			path:'/images/face/'	//表情存放的路径
+		});
+
+	})
+</script>

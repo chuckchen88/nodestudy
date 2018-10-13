@@ -1,0 +1,291 @@
+ <link rel='stylesheet' href='/stylesheets/blog.css' />
+<% include header.ejs %>
+<% if(user) {%>
+	<% if (user.name == 'chuck') { %>
+	<div id="postNewArticle" class="masker postNewArticle">
+		<div class="message">
+			<div class="closeBtn"></div>
+			<div class="t"><span></span>发布新文章</div>
+			
+		</div>
+	</div>
+	<div id="changeHeadImg" class="masker changeHeadImg">
+		<div class="head-imgs">
+			<div class="closeBtn"></div>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<div class="clear"></div>
+			</ul>
+			<div class="saveHeadImg">
+				<a id="saveChange" href="javascipt:;">保存修改</a>
+				<a id="cancleChange" href="javascipt:;">取消</a>
+			</div>
+		</div>
+	</div>
+	<% } %>
+<% } %>
+<div class="top">
+	<div class="t">
+		<h1>Welcome to my blog</h1>
+		<p>Chuck.Chen's blog</p>
+	</div>
+</div>
+<div class="contain articles">
+	<div class="position">
+		<span class="fl-l">
+			<i class="p"></i>所在位置：<a href="javascipt:">博文</a>·<a href="/blog-article/1">文章</a>·<a href="javascipt:"><%= article.title %></a>
+		</span>
+		<% if (user) { %>
+			<% if(user.name == 'chuck') { %>
+			<span class="fl-r write-art">
+				<a id="edit" href="javascipt:;">编辑</a>
+				<a id="remove" href="/remove/<%= article._id %>" onclick="javascript:return del()">删除</a>
+			</span>
+			<% } %>
+		<% } %>
+		<div class="clear"></div>
+	</div>
+	<div class="content-area">
+		<div class="fl-l art-items">
+			<div class="art-item article-detail-area">
+				<div class="title" style="border-bottom: 1px solid rgba(179, 136, 119, 0.26);padding-bottom: 10px;">
+					<h1><%= article.title %></h1>
+					<h3>发表时间：<%= article.time.minute %>&nbsp;&nbsp;&nbsp;&nbsp;作者：chuck&nbsp;&nbsp;&nbsp;&nbsp;阅读(<%= article.pv %>)</h3>
+				</div>
+				<div class="article-detail" id="article-detail">
+					<%- article.content %>
+				</div>
+				<div class="end">(完)</div>
+			</div>
+			<div class="comment">
+				<form method="post" action=" ">
+					<div class="head">
+						<% if(user){ %>
+						<img src="http://www.chuckchen.top/images/head-imgs/<%= user.headImgNum %>.jpg">
+						<p><%= user.thumName %></p>
+						<p id="changeHeadBtn" style="cursor:pointer">修改头像</p>
+						<% } else { %>
+						<img src="http://www.chuckchen.top/images/leave-words/head-img.jpg">
+						<p>用户名</p>
+						<% } %>
+					</div>
+					<% if(!user) { %>
+					<div class="message">
+						<p class="remind" style="width: 98%;border: 1px solid #ccc;top: 0;left: 11px;margin: 0;padding: 0;height: 100px;line-height: 94px;text-align: center;">请先<a href="/login">登录</a>再评论哦！</p>
+						<textarea style="border:none; display:none;" id="comments"></textarea>
+						<a href="javascipt:;" class="emotion"></a>
+					</div>
+					<% }else{ %>
+					<div class="message">
+						<textarea id="comments" name="comments"></textarea>
+						<div class="expression">
+							<a href="javascipt:;" class="emotion" title="插入表情"></a>
+							<button type="submit">
+								发表
+							</button>
+						</div>
+					</div>
+					<% } %>
+					<div class="clear"></div>
+				</form>
+			</div>
+			<div class="all-comments">
+				<div class="t"><span></span><%= article.comments.length %>条评论</div>
+				<div id="com-items" class="com-items">
+					<% article.fiveComments.forEach(function(comment, index){ %>
+					<div class="item">
+						<div class="head">
+							<img src="http://www.chuckchen.top/images/head-imgs/<%= comment.headImgNum %>.jpg">
+						</div>
+						<div class="message">
+							<div class="info">
+								<%- comment.content %>
+							</div>
+							<div class="editor">
+								<p class="fl-l">
+									<%= comment.name %>
+									<% if(user) {%>
+										<% if (user.name == comment.name) { %>&nbsp;&nbsp;
+										<a style="color:#333;" href="/blog-article-details-comment/remove/<%= article._id %>/<%= comment.uuid %>" onclick="javascript:return del()">删除</a>
+										<% } %>
+									<% } %>
+								</p>
+								
+								<p class="fl-r"><%= comment.time %></p>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<% }) %>
+				</div>
+			</div>
+			<div class="add-more">
+				加载更多评论...
+			</div>
+		</div>
+		<div class="fl-r about-info">
+			<div class="hot-art">
+				<h1 class="t"><span></span>最热文章</h1>
+				<ul>
+					<% topFive.forEach(function(article, index) { %>
+						<li><span><%= index+1 %></span><a href="/blog-article/<%= page %>/<%= article._id %>"><%= article.thumTitle %></a><i class="fl-r" style="color:#666;font-size:12px;"><%= article.time.day %></i></li>
+					<% }) %>
+				</ul>
+			</div>
+			<div class="about-blog">
+				<h1 class="t"><span></span>关于博文</h1>
+				<p style="text-indent: 24px;">
+					欢迎您来到我的博客，此博客系统是我本人于3月初启动到4月底设计开发完成的。主要目的是分享我自己的博文、随心说说，网友有任何想法和建议都可以对其进行评论留言。此博客功能是用node结合着mongodb技术开发实现的，无论是响应速度还是数据存储读取速度都是极快的，但仍然也存在着很多的不足，希望通道中人多多指教，因为您的建议和想法是我最宝贵的财富。
+				</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<% include footer.ejs %>
+<script>
+	var isForm = false;
+
+	function edit(id){
+		$.ajax({
+			url : "/blog-article/page/edit/"+ id +"/",
+			data:{},
+			success : function(data) {
+				var str = '<form method="post" action="/blog-article/page/edit/'+ data._id +'"><input name="title" type="text" placeholder="输入标题" value="'+data.title+'"><input name="picUrl" type="text" value="'+data.picUrl+'" placeholder="请输入缩略图文件名包含后缀"><textarea name="content" placeholder="输入内容">'+ data.content +'</textarea><input type="submit" value="确认修改"></form>';
+				if(!isForm){
+					$('#postNewArticle .message').append(str);
+				}
+				$('#postNewArticle').show();
+				isForm = true;
+			}
+		});
+	}
+	function del() { 
+		var msg = "您真的确定要删除吗？\n\n请确认！"; 
+		if (confirm(msg)==true){ 
+			return true; 
+		}else{ 
+			return false; 
+		} 
+	}
+	function moreNews(id, n){
+		$.ajax({
+			url : "/add-more-comments/"+ id +"/"+ n +"/",
+			data:{n : n, id : id},
+			success : function(data) {
+				console.log(data);
+				if(data.length == 0){
+					$(".add-more").hide();
+					$("#com-items").append('<p style="color:#666;font-size:14px;text-align:center;margin:10px 0;">已加载全部</p>');
+					return;
+				}
+
+				for(var i=0;i<data.length;i++){
+					var str;
+					<% if(user) { %>
+						if('<%= user.name %>'==data[i].name){
+							str = '<div class="item"><div class="head"><img src="http://www.chuckchen.top/images/head-imgs/'+ data[i].headImgNum +'.jpg"></div><div class="message"><div class="info">'+ data[i].content +'</div><div class="editor"><p class="fl-l">'+ data[i].name +'&nbsp;&nbsp;<a style="color:#333;" href="/blog-article-details-comment/remove/<%= article._id %>/'+ data[i].uuid +'" onclick="javascript:return del()">删除</a></p><p class="fl-r">'+ data[i].time +'</p><div class="clear"></div></div></div><div class="clear"></div></div>';
+							$("#com-items").append(str);
+						}else{
+							str = '<div class="item"><div class="head"><img src="http://www.chuckchen.top/images/head-imgs/'+ data[i].headImgNum +'.jpg"></div><div class="message"><div class="info">'+ data[i].content +'</div><div class="editor"><p class="fl-l">'+ data[i].name +'</p><p class="fl-r">'+ data[i].time +'</p><div class="clear"></div></div></div><div class="clear"></div></div>';
+							$("#com-items").append(str);
+						}
+					<% }else{ %>
+						str = '<div class="item"><div class="head"><img src="http://www.chuckchen.top/images/head-imgs/'+ data[i].headImgNum +'.jpg"></div><div class="message"><div class="info">'+ data[i].content +'</div><div class="editor"><p class="fl-l">'+ data[i].name +'</p><p class="fl-r">'+ data[i].time +'</p><div class="clear"></div></div></div><div class="clear"></div></div>';
+						$("#com-items").append(str);
+					<% } %>
+				}
+			}
+		});
+	}
+	$(function(){
+		$($('#article-detail').find('a')).filter(function() {
+		    return this.hostname != window.location.hostname;
+		}).attr('target', '_blank');
+		nav(3);
+		PullDownMenu();
+		
+		$('.closeBtn').click(function(){
+			$('#postNewArticle').hide();
+		})
+
+		$('#edit').click(function(){
+			edit('<%= article._id %>');
+		})
+
+		//qq表情
+		$('.emotion').qqFace({
+			id : 'facebox', 
+			assign:'comments', 
+			path:'/images/face/'	//表情存放的路径
+		});
+		$(".sub_btn").click(function(){
+			var str = $("#comments").val();
+			$("#show").html(replace_em(str));
+		});
+
+		//ajax加载更多评论
+		var num = 2;
+		var _id = '<%= article._id %>';
+		$('.add-more').click(function(){
+			moreNews(_id ,num);
+			num++;
+		})
+
+//////用户修改头像
+		var headNum = 0;
+		$('#changeHeadBtn').click(function(){
+			$('#changeHeadImg').show();
+		})
+		$('#cancleChange').click(function(){
+			$('#changeHeadImg').hide();
+		})
+		$('#changeHeadImg ul li').click(function(){
+			var index = $(this).index();
+			$(this).addClass('active').siblings().removeClass('active');
+			headNum = index;
+		})
+		$('#saveChange').click(function(){
+			$.ajax({
+				url : "/changeHeadImg/"+ headNum +"/",
+				//data:{headNum : headNum},
+				success : function(data) {
+					$('#changeHeadImg').hide();
+					location.reload();
+				}
+			});
+		})
+	})
+</script>

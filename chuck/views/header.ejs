@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta name="baidu-site-verification" content="26Rmoq1bgM" />
+  	 <meta name="Keywords" content="个人网站,chuck,chuck个人网站,web前端工程师,web">
+ 	   <meta name="description" content="chuck个人网站">
+     <link rel="shortcut icon" type="image/x-icon" href="http://www.chuckchen.top/favicon.ico">
+     <title>查克个人网站</title>
+     <link rel='stylesheet' href='/stylesheets/reset.css' />
+     <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <div class="nav-bar">
+  	<div class="contain">
+  		<div class="logo fl-l"><a href="/"></a></div>
+	  	<nav class="nav fl-r">
+		  	<a href="/">首页</a>
+		  	<a href="/about">关于</a>
+		  	<a href="/works">作品</a>
+        <a class="blog" href="javascript:;">博文</a>
+        <a href="/leave-words">留言</a>
+        <% if (!user) { %>
+        <a href="/login">登录/注册</a>
+        <% } else { %>
+        <a class="logout" title="退出登录" href="/logout"><%= user.thumName %><span>退出登录</span></a>
+        <% } %>
+	  	</nav>
+  	</div>
+  </div>
+  <div class="pull-down-menu">
+      <a href="/blog-ana"><span>随心说</span><i></i></a>
+      <a href="/blog-article/1"><span>文章</span><i></i></a>
+      <div class="f"></div>
+  </div>
+  <div class="content">

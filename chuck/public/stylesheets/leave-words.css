@@ -1,0 +1,212 @@
+body{
+	background-color:#f1f1f1;
+}
+.top{
+	width:100%;
+	height:40vh;
+	min-height: 200px;
+	background:url(../images/leave-words/leave-top.jpg) center center no-repeat;
+	background-size:cover;
+	position:relative;
+}
+.top .text{
+	display:inline-block;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:200px;
+	margin-top:-50px;
+}
+.top .text h3{
+	font-size:30px;
+	color:#554a5e;
+}
+.top .text p{
+	font-size:12px;
+	color:#7a5a67;
+}
+
+.leave .con{
+	width:65%;
+	padding:10px 20px;
+}
+.leave .info{
+	width:35%;	
+	padding: 10px 20px;
+}
+.leave{
+	padding:20px 0;
+}
+.leave-area{
+	position:relative;
+	background:white;
+	padding:10px;
+	box-shadow: 0 0 2px 0px #ddd;
+}
+.leave-area input{
+	width:50%;
+	height:40px;
+	line-height: 30px;
+	border:1px solid #CCC;
+	outline: none;
+	font-size:14px;
+	padding-left:10px;
+	transition:all 0.4s;
+}
+.leave-area textarea{
+	width:100%;
+	height:150px;
+	line-height: 20px;
+	border:1px solid #CCC;
+	outline: none;
+	font-size:14px;
+	padding:10px;
+	margin-top:10px;
+	max-height: 150px;
+	max-width: 100%;
+	transition:all 0.4s;
+}
+.leave-area input:focus,.leave-area textarea:focus{
+	border:1px solid #7b503f;
+}
+.leave-area>p{
+	position:absolute;
+	display:inline-block;
+	top:190px;
+	color:#ccc;
+	font-size:12px;
+}
+.leave-area>p.l{
+	left:20px;
+}
+.leave-area>p.r{
+	right:20px;
+}
+.leave-area .btn{
+	width:15%;
+	height:30px;
+	margin-top:10px;
+	background:url(../images/index/small-nav.jpg);
+	color:white;
+	outline: none;
+	border:none;
+	cursor:pointer;
+	padding:0;
+}
+.leave-area .err{
+	color:#7b503f;
+	padding-left:10px;
+	font-size:12px;
+}
+/**leave**/
+.leave-lists{
+	margin:10px 0;
+}
+.leave-lists .item{
+	margin:10px 0;
+	background:white;
+	box-shadow: 0 0 2px 0px #ddd;
+}
+.leave-lists .item h1{
+	width:100%;
+	height:30px;
+	line-height: 30px;
+	background:url(../images/index/small-nav-bg.jpg);
+	color:#333;
+	font-size:14px;
+}
+.leave-lists .item h1 span{
+	display:inline-block;
+	float:left;
+	width:10px;
+	height:30px;
+	background:url(../images/index/small-nav.jpg);
+	margin-right:5px;
+}
+.leave-lists .item h1 label{
+	float:right;
+	margin-right:10px;
+	font-size:12px;
+	color:#666;
+}
+.leave-lists .item .con-area{
+	padding:10px;
+}
+.item .con-area .head-img{
+	float:left;
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	background:url(../images/leave-words/head-img.jpg) center center no-repeat;
+	background-size:cover;
+}
+.item .con-area .message{
+	font-size:12px;
+	color:#333;
+	line-height: 18px;
+	width:calc(100% - 50px);    /**calc用法**/
+	float:left;
+	padding:10px 0 10px 10px;
+}
+.item .con-area .time{
+	float:right;
+	color:#ccc;
+	font-size:12px;
+}
+.add-more{
+	width:100%;
+	height:40px;
+	background:url(../images/index/small-nav-bg.jpg);
+	line-height: 40px;
+	transition:all 0.4s;
+	color:#333;
+	text-align: center;
+	cursor:pointer;
+}
+.add-more:hover{
+	background:url(../images/index/small-nav.jpg);
+	color:white;
+}
+
+.master-word,.about-leave {
+	background:white;
+	box-shadow: 0 0 2px 0px #ddd;
+	margin-bottom:10px;
+}
+.master-word .info-content,.about-leave .info-content{
+	padding:10px;
+	color:#555;
+	font-size:12px;
+	text-indent: 24px;
+}
+.master-word h1,.about-leave h1{
+	width:100%;
+	height:40px;
+	line-height: 40px;
+	background:url(../images/index/small-nav-bg.jpg);
+	color:#333;
+	font-size:14px;
+}
+.master-word h1 span,.about-leave h1 span{
+	display:inline-block;
+	float:left;
+	width:10px;
+	height:40px;
+	background:url(../images/index/small-nav.jpg);
+	margin-right:5px;
+}
+
+
+
+.expression{
+	position:relative;
+}
+.expression a {
+    width: 18px;
+    position: relative;
+    height: 18px;
+    background: url(../images/blog/common/sprites.png) 0 -13px no-repeat;
+    display: inline-block;
+    top: 15px;
+    left: 10px;
+}
