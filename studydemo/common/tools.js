@@ -1,4 +1,4 @@
-
+var bcrypt = require('bcryptjs'); //加密
 var moment = require('moment')    //格式化时间
 moment.locale('zh-cn')
 
@@ -16,15 +16,31 @@ exports.formatDate = function(date, friendly){
         return date.format('YYYY-MM-DD HH:mm')
     }
 }
-
 /**
- * 验证邮箱
- * @param mail 邮箱
+ * 验证字符串是否合法（用户名）
+ * @param str
  * @returns {boolean}
  */
-exports.isMail = function (mail) {
-    return (/^(w-*.*)+@(w-?)+(.w{2,})+$/).test(mail)
-}
+exports.validateId = function (str) {
+    return (/^[a-zA-Z0-9\-_]+$/i).test(str);
+};
+/**
+ * 密码加密
+ * @param str
+ * @param callback
+ */
+exports.bhash = function (str, callback) {
+    bcrypt.hash(str, 10, callback);
+};
+/**
+ * 验证密码加密
+ * @param str
+ * @param hash
+ * @param callback
+ */
+exports.bcompare = function (str, hash, callback) {
+    bcrypt.compare(str, hash, callback);
+};
 /**
  * 统一返回数据
  * @param code [num]  状态码

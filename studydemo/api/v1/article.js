@@ -1,6 +1,6 @@
 var responseData = require('../../common/tools').responseData;  //统一返回数据封装
 var validator = require('validator')   //验证
-var ArticleProxy = require('../../proxy/article')  //文章方法
+var ArticleProxy = require('../../proxy').Article  //方法
 //var eventproxy = require('eventproxy') //异步协作
 /**
  * 文章列表

@@ -16,6 +16,7 @@ mongoose.connect(config.db, {
 
 //modles
 require('./article')
+require('./user')
 
-exports.Article = mongoose.model('Article')
+exports.User = mongoose.model('User')
 

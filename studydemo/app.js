@@ -1,5 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -9,7 +11,7 @@ var usersRouter = require('./routes/users');
 
 var apiRouterV1 = require('./routes/api_router_v1'); //api路由
 var cors = require('cors');  //跨域
-
+var config = require('./config')
 var app = express();
 
 // view engine setup
@@ -19,8 +21,22 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 中间件
+app.use(cookieParser(config.session_secret));   //session_secret:给cookie签名
+app.use(session({
+    secret: config.session_secret,
+    store: new RedisStore({
+        port: config.redis_port,
+        host: config.redis_host,
+        db: config.redis_db,
+        pass: config.redis_password,
+    }),
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.use('/api/v1', cors(), apiRouterV1);
 app.use('/', indexRouter);
